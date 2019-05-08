@@ -1,0 +1,19 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}This is an example page{% endblock %}
+
+
+{% block content %}
+  <div class="container">
+    <h1>Set Account Expired</h1>
+        <form action="{{ url_for('index') }}" method="POST">
+            {{ form.csrf_token }}
+            {{ form.Username.label }} <br>
+            {{ form.Username }} <br>  <br>
+            {{ form.DateForm.label }} <br>
+            {{ form.DateForm }} <br> <br> <br>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+  </div>
+{% endblock %}
