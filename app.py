@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify
 # from flask_wtf import FlaskForm, RecaptchaField
 from flask_wtf import FlaskForm
-from wtforms.fields.html5 import DateField
+from wtforms.fields.html5 import DateField, TimeField
 from wtforms import StringField
 from wtforms.validators import InputRequired
 from flask_bootstrap import Bootstrap
@@ -18,6 +18,7 @@ class dateForm(FlaskForm):
                          validators=[InputRequired(message='Expired date has Required')])
     Username = StringField('Username', validators=[
                            InputRequired('A Username has Required')])
+    Time = TimeField('time') 
     # recaptcha = RecaptchaField()
 
 
@@ -28,6 +29,7 @@ def index():
         ret = {
             'username': form.Username.data,
             'unixTime': form.DateForm.data.strftime('%s'),
+            'time': str(form.Time.data),
             'ldapTime': (int(form.DateForm.data.strftime('%s')) + 11644473600) * 10000000
         }
         return jsonify({'data': ret})
